@@ -1,0 +1,53 @@
+# Data
+
+This project uses a **synthetic ZIP-code-level dataset** created for portfolio demonstration purposes. It models program participation, rental assistance, and financial-wellness attendance across five Texas metropolitan areas.
+
+No client-level or personally identifiable information is included. Geographic ZIP boundaries and labels are retained so the geospatial workflow remains realistic.
+
+## Files
+
+- `asp_zip_metrics.csv` — analysis-ready ZIP-level metrics used by the notebook and map
+- `geometry/asp_zip_geometries_part_*.geojson` — simplified ZIP geometries keyed by ZIP code
+
+## Data dictionary
+
+| Field | Type | Meaning |
+|---|---|---|
+| `zip_code` | string | Five-digit ZIP code and unit of analysis. |
+| `city` | string | Metropolitan area assigned to the ZIP code: Austin, Dallas, Fort Worth, Houston, or San Antonio. |
+| `total_households` | integer | Unique participating households by the end of September. |
+| `total_participants` | integer | Unique participating individuals, including Primary Applicants and Household Members. |
+| `ra_july` | currency | Rental assistance distributed during July. |
+| `ra_august` | currency | Rental assistance distributed during August. |
+| `ra_september` | currency | Rental assistance distributed during September. |
+| `ra_total` | currency | July + August + September rental assistance. |
+| `fwc_july` | integer | Unique Financial Wellness Course attendees during July. |
+| `fwc_august` | integer | Unique Financial Wellness Course attendees during August. |
+| `fwc_september` | integer | Unique Financial Wellness Course attendees during September. |
+| `fwc_total` | integer | Unique Financial Wellness Course attendees across the full July–September period. This is not the sum of the three monthly fields because participants may attend in more than one month. |
+| `enrolled_july_cumulative` | integer | Households enrolled by the end of July. |
+| `enrolled_august_cumulative` | integer | Households enrolled by the end of August. |
+| `enrolled_september_cumulative` | integer | Households enrolled by the end of September; equals `total_households`. |
+| `top10_ra_city` | boolean | Whether the ZIP is among the 10 highest rental-assistance ZIP codes within its metro area. |
+| `latitude` | float | ZIP representative latitude used for navigation, heat-map placement, and markers. |
+| `longitude` | float | ZIP representative longitude used for navigation, heat-map placement, and markers. |
+| `ra_per_household` | float | Derived rental assistance per participating household: `ra_total / total_households`. |
+| `participants_per_household` | float | Derived average participants per household: `total_participants / total_households`. |
+| `ra_aug_vs_july_pct` | float | Derived August rental-assistance MoM percentage change relative to July. |
+| `ra_sep_vs_aug_pct` | float | Derived September rental-assistance MoM percentage change relative to August. |
+
+## Interpretation notes
+
+- **Enrollment fields are cumulative.** August contains households enrolled by August, not only households newly enrolled during August.
+- **Rental-assistance fields are monthly flows.** `ra_total` is their three-month sum.
+- **FWC monthly values and `fwc_total` use different uniqueness windows.** Monthly values count unique attendees within each month; the total counts unique attendees across all three months.
+- **MoM** means month-over-month change relative to the prior month.
+- The analysis supports descriptive statistics, geographic comparison, trend analysis, and association analysis, but not individual-level or causal inference.
+
+## Synthetic-data treatment
+
+The values are intentionally perturbed synthetic figures. They preserve plausible program relationships and geographic patterns for analytical demonstration, but they are not intended to reproduce operational records or exact historical totals.
+
+## Geometry note
+
+The ZIP geometry is simplified for web performance and split across five GeoJSON files for repository portability. ZIP identifiers and the overall geographic shapes are retained, while unnecessary coordinate detail is removed.
