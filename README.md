@@ -4,8 +4,8 @@ An end-to-end Python data-science project exploring the geographic distribution 
 
 The project combines **data validation, exploratory analysis, geospatial visualization, and reproducible reporting** to turn program-administration data into an interactive analytical product.
 
-[**View the live interactive map**](https://fernandoverdugo.github.io/texas-afghan-support-geospatial-analytics/)
-
+[**View the live interactive map**](https://fernandoverdugo.github.io/texas-afghan-support-geospatial-analytics/)  
+[**View the rendered analysis notebook**](notebooks/01_exploratory_analysis.ipynb)
 
 > **Portfolio dataset:** All program values are synthetic and intentionally perturbed. The project demonstrates analytical methods and software workflow rather than reporting operational results.
 
@@ -91,7 +91,9 @@ Automated tests verify schema, ZIP uniqueness, expected metro areas, nonnegative
 
 ### Exploratory data analysis
 
-The notebook examines:
+[**Open the rendered Jupyter notebook**](notebooks/01_exploratory_analysis.ipynb)
+
+The notebook is fully executed in the repository, so GitHub displays the analytical tables and visualizations without requiring the reader to run the code first. It examines:
 
 - descriptive statistics and data-quality checks
 - metro-area comparisons
@@ -130,7 +132,7 @@ Regenerate summary tables, charts, and the interactive map:
 python scripts/run_pipeline.py
 ```
 
-Open the exploratory notebook (kept output-light in the repository so it stays fast to review):
+Open the exploratory notebook locally:
 
 ```bash
 jupyter lab notebooks/01_exploratory_analysis.ipynb
