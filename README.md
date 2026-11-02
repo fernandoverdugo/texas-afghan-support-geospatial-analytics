@@ -156,9 +156,9 @@ The repository uses synthetic ZIP-code-level portfolio data modeled on program-a
 
 ## GitHub Pages
 
-The interactive map is generated from the Python source during GitHub Actions rather than committed as a large HTML artifact. The workflow runs the tests, rebuilds `docs/index.html`, uploads the Pages artifact, and deploys it.
+The interactive map is generated automatically through GitHub Actions. Each workflow run validates the data, rebuilds the analytical outputs and Folium application, and deploys the resulting site to GitHub Pages.
 
-After the first push, open **Settings → Pages** and make sure the publishing source is **GitHub Actions**. The deployed site is linked near the top of this README.
+[**View the live interactive map**](https://fernandoverdugo.github.io/texas-afghan-support-geospatial-analytics/)
 
 ## License
 
