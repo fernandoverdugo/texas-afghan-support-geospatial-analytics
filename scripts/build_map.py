@@ -697,7 +697,6 @@ class PortfolioControls(MacroElement):
             """
         )
 
-
 def geojson_bounds(geojson):
     lats = []
     lons = []
@@ -998,3 +997,105 @@ def main():
         folium.GeoJson(
             geojson,
             name=name,
+            style_function=make_style(metric, edges, colors),
+            highlight_function=lambda feature: {
+                "weight": 2,
+                "color": "#0f172a",
+                "fillOpacity": 0.9,
+            },
+            tooltip=folium.GeoJsonTooltip(
+                fields=tooltip_fields,
+                localize=False,
+                sticky=False,
+                labels=False,
+                class_name="asp-tooltip",
+            ),
+            popup=folium.GeoJsonPopup(
+                fields=tooltip_fields,
+                localize=False,
+                labels=False,
+                class_name="asp-popup",
+                max_width=540,
+            ),
+        ).add_to(group)
+        group.add_to(m)
+        metric_layer_names[metric] = group.get_name()
+        legend_data[metric] = {
+            "title": name,
+            "rows": legend_rows(edges, colors, money),
+        }
+
+    heat_data = [
+        [row.latitude, row.longitude, row.total_participants]
+        for row in df.itertuples()
+        if pd.notna(row.latitude) and pd.notna(row.longitude)
+    ]
+    heat_group = folium.FeatureGroup(name="Participant Heat Map", show=False, control=False)
+    HeatMap(heat_data, radius=22, blur=18, min_opacity=0.22).add_to(heat_group)
+    heat_group.add_to(m)
+
+    top_group = folium.FeatureGroup(name="Top-10 RA ZIPs within each metro", show=False, control=False)
+    for row in df[df["top10_ra_city"]].itertuples():
+        popup = folium.Popup(
+            (
+                f"<div style='font:13px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;min-width:180px'>"
+                f"<div style='font-weight:750;font-size:14px'>{row.zip_code} · {row.city}</div>"
+                f"<div style='margin-top:5px'>Rental assistance: <b>${row.ra_total:,.0f}</b></div>"
+                f"<div>Households: <b>{row.total_households:,.0f}</b></div>"
+                f"<div>Participants: <b>{row.total_participants:,.0f}</b></div>"
+                f"</div>"
+            ),
+            max_width=260,
+        )
+        folium.CircleMarker(
+            location=[row.latitude, row.longitude],
+            radius=4.5,
+            color="#0f172a",
+            weight=1.2,
+            fill=True,
+            fill_color="#ffffff",
+            fill_opacity=0.95,
+            popup=popup,
+        ).add_to(top_group)
+    top_group.add_to(m)
+
+    zip_lookup = {
+        row.zip_code: [float(row.latitude), float(row.longitude)]
+        for row in df.itertuples()
+        if pd.notna(row.latitude) and pd.notna(row.longitude)
+    }
+    city_centers = (
+        df.groupby("city")[["latitude", "longitude"]]
+        .median()
+        .apply(lambda row: [float(row["latitude"]), float(row["longitude"])], axis=1)
+        .to_dict()
+    )
+
+    PortfolioControls(
+        map_name=m.get_name(),
+        metric_layers=metric_layer_names,
+        heat_layer=heat_group.get_name(),
+        top_layer=top_group.get_name(),
+        legend_data=legend_data,
+        zip_lookup=zip_lookup,
+        city_centers=city_centers,
+        bounds=bounds,
+    ).add_to(m)
+
+    OUTPUT.parent.mkdir(exist_ok=True)
+    m.save(OUTPUT)
+
+    dependencies = """
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
+    """
+    rendered = OUTPUT.read_text(encoding="utf-8")
+    rendered = rendered.replace("</head>", dependencies + "\n</head>", 1)
+    OUTPUT.write_text(rendered, encoding="utf-8")
+
+    print(f"Wrote {OUTPUT.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()
