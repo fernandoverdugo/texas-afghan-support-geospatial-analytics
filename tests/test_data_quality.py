@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 import pandas as pd
 
@@ -89,3 +90,20 @@ def test_top10_flag_count_by_metro():
     df = load()
     flagged = df.groupby("city")["top10_ra_city"].sum()
     assert (flagged == 10).all()
+
+def test_project_summary_matches_source_data():
+    df = load()
+    summary = json.loads((ROOT / "data" / "processed" / "project_summary.json").read_text())
+
+    assert summary["geography"]["zip_codes"] == len(df)
+    assert summary["geography"]["metro_areas"] == df["city"].nunique()
+    assert summary["program_totals"]["households"] == int(df["total_households"].sum())
+    assert summary["program_totals"]["participants"] == int(df["total_participants"].sum())
+    assert summary["program_totals"]["rental_assistance"] == float(df["ra_total"].sum())
+    assert summary["program_totals"]["financial_wellness_attendees"] == int(df["fwc_total"].sum())
+
+    expected_share = round(float(df.nlargest(10, "ra_total")["ra_total"].sum() / df["ra_total"].sum()), 4)
+    city_ra = df.groupby("city")["ra_total"].sum().sort_values(ascending=False)
+    assert summary["concentration"]["top_10_zip_rental_assistance_share"] == expected_share
+    assert summary["concentration"]["leading_metro"] == city_ra.index[0]
+    assert summary["concentration"]["leading_metro_rental_assistance"] == float(city_ra.iloc[0])
