@@ -82,6 +82,7 @@ def main():
     plt.title("Rental Assistance by Metro Area")
     plt.tight_layout()
     plt.savefig(ASSETS / "rental_assistance_by_city.png", dpi=160)
+    plt.savefig(ASSETS / "rental_assistance_by_city.svg")
     plt.close()
 
     plt.figure(figsize=(7, 5))
