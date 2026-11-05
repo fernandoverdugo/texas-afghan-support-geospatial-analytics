@@ -7,7 +7,7 @@ The project combines **data validation, exploratory analysis, geospatial visuali
 [**View the live interactive map**](https://fernandoverdugo.github.io/texas-afghan-support-geospatial-analytics/)  
 [**View the rendered analysis notebook**](notebooks/01_exploratory_analysis.ipynb) · [**View project summary**](data/processed/project_summary.json)
 
-![Synthetic rental assistance by metro area](assets/rental_assistance_by_city.png)
+![Synthetic rental assistance by metro area](assets/rental_assistance_by_city.svg)
 
 > **Portfolio dataset:** All program values are synthetic and intentionally perturbed. The project demonstrates analytical methods and software workflow rather than reporting operational results.
 
