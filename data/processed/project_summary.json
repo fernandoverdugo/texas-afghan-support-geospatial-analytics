@@ -1,0 +1,18 @@
+{
+  "geography": {
+    "zip_codes": 192,
+    "metro_areas": 5
+  },
+  "program_totals": {
+    "households": 3500,
+    "participants": 6008,
+    "rental_assistance": 11744050,
+    "financial_wellness_attendees": 6471
+  },
+  "concentration": {
+    "top_10_zip_rental_assistance_share": 0.5758,
+    "leading_metro": "Houston",
+    "leading_metro_rental_assistance": 4213271
+  },
+  "interpretation": "Synthetic ZIP-level portfolio data; results demonstrate descriptive geospatial analytics and are not operational program totals."
+}
