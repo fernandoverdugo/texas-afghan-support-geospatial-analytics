@@ -107,3 +107,9 @@ def test_project_summary_matches_source_data():
     assert summary["concentration"]["top_10_zip_rental_assistance_share"] == expected_share
     assert summary["concentration"]["leading_metro"] == city_ra.index[0]
     assert summary["concentration"]["leading_metro_rental_assistance"] == float(city_ra.iloc[0])
+
+
+def test_readme_preview_asset_is_present():
+    svg = (ROOT / "assets" / "rental_assistance_by_city.svg").read_text()
+    for city in ["Austin", "Dallas", "Fort Worth", "Houston", "San Antonio"]:
+        assert city in svg
