@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -36,6 +37,31 @@ def main():
         ["zip_code", "city", "total_households", "total_participants", "ra_total"]
     ]
     top.to_csv(OUT / "top_zip_codes_by_ra.csv", index=False)
+
+    top10_share = float(df.nlargest(10, "ra_total")["ra_total"].sum() / df["ra_total"].sum())
+    leading_city = city.iloc[0]
+    summary = {
+        "geography": {
+            "zip_codes": int(len(df)),
+            "metro_areas": int(df["city"].nunique()),
+        },
+        "program_totals": {
+            "households": int(df["total_households"].sum()),
+            "participants": int(df["total_participants"].sum()),
+            "rental_assistance": float(df["ra_total"].sum()),
+            "financial_wellness_attendees": int(df["fwc_total"].sum()),
+        },
+        "concentration": {
+            "top_10_zip_rental_assistance_share": round(top10_share, 4),
+            "leading_metro": str(leading_city["city"]),
+            "leading_metro_rental_assistance": float(leading_city["rental_assistance"]),
+        },
+        "interpretation": "Synthetic ZIP-level portfolio data; results demonstrate descriptive geospatial analytics and are not operational program totals.",
+    }
+    (OUT / "project_summary.json").write_text(
+        json.dumps(summary, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
     print("Portfolio dataset summary")
     print("-------------------------")
