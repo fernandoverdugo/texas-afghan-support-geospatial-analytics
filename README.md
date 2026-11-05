@@ -5,7 +5,9 @@ An end-to-end Python data-science project exploring the geographic distribution 
 The project combines **data validation, exploratory analysis, geospatial visualization, and reproducible reporting** to turn program-administration data into an interactive analytical product.
 
 [**View the live interactive map**](https://fernandoverdugo.github.io/texas-afghan-support-geospatial-analytics/)  
-[**View the rendered analysis notebook**](notebooks/01_exploratory_analysis.ipynb)
+[**View the rendered analysis notebook**](notebooks/01_exploratory_analysis.ipynb) · [**View project summary**](data/processed/project_summary.json)
+
+![Synthetic rental assistance by metro area](assets/rental_assistance_by_city.png)
 
 > **Portfolio dataset:** All program values are synthetic and intentionally perturbed. The project demonstrates analytical methods and software workflow rather than reporting operational results.
 
@@ -41,6 +43,13 @@ These findings describe the **synthetic portfolio dataset**:
 - Executed exploratory-analysis notebook with descriptive, temporal, normalized, and correlation analysis
 - Automated data-quality tests and GitHub Actions continuous integration
 - Reproducible Python pipeline for generated tables, charts, and the interactive map
+- Machine-readable project summary validated directly against the committed ZIP-level source data
+
+## Example analytical use
+
+The synthetic portfolio contains **3,500 households and 6,008 participants across 192 ZIP codes**, with approximately **$11.74 million** in modeled rental assistance. The 10 highest-assistance ZIP codes account for about **57.6%** of that total, while Houston is the largest metro-level concentration.
+
+A program analyst could use this combination of geographic concentration, monthly change, and normalized measures such as assistance per household to decide where additional review or outreach may be warranted. The project intentionally stops at descriptive analysis: the synthetic aggregate data are appropriate for geographic program monitoring, not causal claims, individual-level targeting, or predictions of client need.
 
 ## Skills demonstrated
 
@@ -55,6 +64,8 @@ These findings describe the **synthetic portfolio dataset**:
 │   ├── asp_zip_metrics.csv
 │   ├── geometry/
 │   │   └── asp_zip_geometries_part_*.geojson
+│   ├── processed/
+│   │   └── project_summary.json
 │   └── README.md
 ├── notebooks/
 │   └── 01_exploratory_analysis.ipynb
