@@ -1,6 +1,6 @@
 # Data
 
-This project uses a **synthetic ZIP-code-level dataset** created for portfolio demonstration purposes. It models program participation, rental assistance, and financial-wellness attendance across five Texas metropolitan areas.
+This project uses a **synthetic ZIP-code-level dataset** designed to preserve realistic program-administration structure without representing operational records. It models program participation, rental assistance, and financial-wellness attendance across five Texas metropolitan areas.
 
 No client-level or personally identifiable information is included. Geographic ZIP boundaries and labels are retained so the geospatial workflow remains realistic.
 
