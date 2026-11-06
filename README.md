@@ -9,7 +9,7 @@ The project combines **data validation, exploratory analysis, geospatial visuali
 
 ![Synthetic rental assistance by metro area](assets/rental_assistance_by_city.svg)
 
-> **Synthetic dataset:** All program values are synthetic and intentionally perturbed. The project demonstrates analytical methods and software workflow rather than reporting operational results.
+> **Synthetic dataset:** All program values are synthetic and intentionally perturbed. The project focuses on analytical methods and software workflow rather than reporting operational results.
 
 ## Project objectives
 
