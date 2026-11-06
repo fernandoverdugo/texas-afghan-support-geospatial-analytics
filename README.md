@@ -9,7 +9,7 @@ The project combines **data validation, exploratory analysis, geospatial visuali
 
 ![Synthetic rental assistance by metro area](assets/rental_assistance_by_city.svg)
 
-> **Portfolio dataset:** All program values are synthetic and intentionally perturbed. The project demonstrates analytical methods and software workflow rather than reporting operational results.
+> **Synthetic dataset:** All program values are synthetic and intentionally perturbed. The project demonstrates analytical methods and software workflow rather than reporting operational results.
 
 ## Project objectives
 
@@ -24,14 +24,14 @@ This project answers several practical program-analysis questions:
 
 ## Key findings
 
-These findings describe the **synthetic portfolio dataset**:
+These findings describe the **synthetic project dataset**:
 
 - **Houston** has the largest aggregate rental-assistance volume at approximately **$4.21M**.
 - The **10 highest-assistance ZIP codes account for 57.6%** of total rental assistance, showing substantial geographic concentration.
 - Statewide synthetic rental assistance increases **44.3% from July to August**, then changes **-1.6% from August to September**.
 - Financial Wellness attendance increases **14.4% in August** and then decreases **72.1% in September**, illustrating why monthly context matters alongside cumulative program measures.
 
-## Portfolio highlights
+## Project highlights
 
 - **192 ZIP-code geographies** across Austin, Dallas, Fort Worth, Houston, and San Antonio
 - Interactive choropleth layers for households, participants, rental assistance, and Financial Wellness Course attendance
@@ -47,11 +47,11 @@ These findings describe the **synthetic portfolio dataset**:
 
 ## Example analytical use
 
-The synthetic portfolio contains **3,500 households and 6,008 participants across 192 ZIP codes**, with approximately **$11.74 million** in modeled rental assistance. The 10 highest-assistance ZIP codes account for about **57.6%** of that total, while Houston is the largest metro-level concentration.
+The synthetic dataset contains **3,500 households and 6,008 participants across 192 ZIP codes**, with approximately **$11.74 million** in modeled rental assistance. The 10 highest-assistance ZIP codes account for about **57.6%** of that total, while Houston is the largest metro-level concentration.
 
 A program analyst could use this combination of geographic concentration, monthly change, and normalized measures such as assistance per household to decide where additional review or outreach may be warranted. The project intentionally stops at descriptive analysis: the synthetic aggregate data are appropriate for geographic program monitoring, not causal claims, individual-level targeting, or predictions of client need.
 
-## Skills demonstrated
+## Methods and tools
 
 `Python` · `pandas` · `NumPy` · `Folium` · `Leaflet` · `GeoJSON` · `Matplotlib` · `Jupyter` · `pytest` · `GitHub Actions` · `EDA` · `data validation` · `geospatial analytics`
 
@@ -165,7 +165,7 @@ Associations are treated as descriptive rather than causal.
 
 ## Data
 
-The repository uses synthetic ZIP-code-level portfolio data modeled on program-administration scenarios. No client-level or personally identifiable information is included. See [`data/README.md`](data/README.md) for the complete data dictionary and interpretation notes.
+The repository uses synthetic ZIP-code-level project data modeled on program-administration scenarios. No client-level or personally identifiable information is included. See [`data/README.md`](data/README.md) for the complete data dictionary and interpretation notes.
 
 ## GitHub Pages
 
