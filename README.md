@@ -1,5 +1,7 @@
 # Texas Afghan Support Program — Geospatial Analytics
 
+[![Quality checks](https://github.com/fernandoverdugo/texas-afghan-support-geospatial-analytics/actions/workflows/quality-checks.yml/badge.svg)](https://github.com/fernandoverdugo/texas-afghan-support-geospatial-analytics/actions/workflows/quality-checks.yml)
+
 An end-to-end Python data-science project exploring the geographic distribution of program participation, rental assistance, and financial-wellness engagement across five Texas metropolitan areas using synthetic ZIP-level data.
 
 The project combines **data validation, exploratory analysis, geospatial visualization, and reproducible reporting** to turn program-administration data into an interactive analytical product.
